@@ -156,8 +156,49 @@ c4constants.splits['val_small'] = DataSplitConstants(hf_split='validation',
                                                      folder_split='val_small',
                                                      raw_samples=10000,
                                                      truncated_samples=10000)
+divanconstants = DatasetConstants(
+    chars_per_sample=4000,  # Example estimate, adjust based on real data
+    chars_per_token=4  # OpenAI estimate
+)
+
+divanconstants.splits['train'] = DataSplitConstants(
+    hf_split='train',
+    folder_split='train',
+    raw_samples=95000000,
+    truncated_samples=None
+)
+
+divanconstants.splits['test'] = DataSplitConstants(
+    hf_split='test',
+    folder_split='test',
+    raw_samples=5000001,
+    truncated_samples=None
+)
+
+finewebconstant = DatasetConstants(
+    chars_per_sample=4000,  # Example estimate, adjust based on real data
+    chars_per_token=4  # OpenAI estimate
+)
+finewebconstant.splits['train'] = DataSplitConstants(
+    hf_split='train',
+    folder_split='train',
+    raw_samples=8704890,
+    truncated_samples=None
+)
+
+divanconstants.splits['test'] = DataSplitConstants(
+    hf_split='test',
+    folder_split='test',
+    raw_samples=967211,
+    truncated_samples=None
+)
+
+# Add divan constants to the main CONSTS dictionary
+
 
 CONSTS = {'c4': c4constants, 'the_pile': pileconstants}
+CONSTS['total_divan'] = divanconstants
+CONSTS['finewebedu'] = finewebconstant
 
 
 class NoConcatDataset(IterableDataset):
